@@ -107,7 +107,9 @@ public class Scratch {
 
 
         graphics.drawLine((int) T.x, (int) T.y, (int) C.x, (int) C.y);
-
+ 
+        
+        // another way by using some dot product tricks. simple
         ProjectAontoB(grapics, mMcount);
         
     }
