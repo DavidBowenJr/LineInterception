@@ -108,7 +108,89 @@ public class Scratch {
 
         graphics.drawLine((int) T.x, (int) T.y, (int) C.x, (int) C.y);
 
+        ProjectAontoB(grapics, mMcount);
+        
     }
+    
+       public void ProjectAontoB(Graphics graphics, MCont mMCont){
+
+        // TransLate Vector back to Origin One way to Prep for Magnitude
+
+        Vector2 a = TransLate(mMCont.PT, new Vector2(-320, -240));
+        Vector2 b = TransLate(mMCont.LSP, new Vector2(-320, -240));
+
+        double on = dotProduct(a, b);
+        double bdotProduct = dotProduct(b,b);
+
+      //  https://www.youtube.com/watch?v=xYYzhHjG94A
+     // Projection of a on b is.
+
+        double ONx = ((on / bdotProduct ) * b.x) + 320;
+        double ONy = ((on / bdotProduct ) * b.y) + 240;
+
+        // same
+        //  double amag = Magnitude(a);
+        //  double bmag = Magnitude(b);
+        // double ONx = ((on / (bmag*bmag)) * b.x) + 320;
+        // double ONy = ((on / (bmag*bmag)) * b.y) + 240;
+
+        graphics.setColor(Color.RED);
+        graphics.drawOval((int)  (ONx) , (int)(ONy) , 4, 4);
+    }
+    
+     public double dotProduct(Vector2 a, Vector2 b)
+    {
+        return ((a.x*b.x) + (a.y * b.y));
+    }
+    
+    
+        /*
+        Formula of Magnitude of a Vector
+            Used to calculate the length of a vector and is denoted by |v|.
+            In one case, the magnitude is calculated for a vector when its endpoints is
+            at origin (0,0) while in the other case, the starting and ending point of the
+            vector is at certain points (x1,y1) and (x2,y2) respectively.
+
+            Magnitude Formula for a Vector When End Point is Origin...
+            |v| = Math.sqrt( x1*x1 + y1*y1);
+
+            Magnitude Formula for a Vector when starting points are (x1,y1) and endpoints
+            are (x2,y2).
+            |v| = Math.sqrt( ( <x2 + x1> * <x2 + x1> ) + ( <y2 + y1> * <y2 + y1> ) );
+     */
+    
+      public double GetVectorLength(Vector2 vec){
+        return Math.sqrt( Math.abs( vec.x * vec.x + vec.y * vec.y ) );
+    }
+
+
+    public double Length(Vector2 vec){
+        return Math.sqrt( Math.abs( vec.x * vec.x + vec.y * vec.y ));
+    }
+    public double Magnitude(Vector2 vec) {
+       return Length(vec);
+    }
+
+
+    public Vector2 NormalizeToUnitVector(Vector2 vec){
+        double mag = GetVectorLength(vec);
+        // |a| = sqrt((a.x*a.x) + (a.y*a.y));
+
+        // Normalized to UnitVector
+        // x = a.x / |a|
+        // y = a.y / |a|
+        return new Vector2(vec.x / mag, vec.y / mag);
+    }
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
 
     public void CaseUnknownPlotDeltaRelativeToOrigin(MCont MCont, Graphics display, Object objectOrigin) {
         //    Point origin = new Point();
